@@ -1,0 +1,6 @@
+<div class="btn-group d-flex" role="group" aria-label="Button group with nested dropdown">
+    <button type="button" class="btn" [class.btn-outline-danger]="!isNotStarted" [class.btn-danger]="isNotStarted" (click)="setNotStarted()"><i class="fa-solid fa-person"></i> Sin iniciar</button>
+    <button type="button" class="btn" [class.btn-outline-warning]="!isInProgress" [class.btn-warning]="isInProgress" (click)="setInProgress()"><i class="fa-solid fa-person-walking"></i> En progeso</button>
+    <button type="button" class="btn" [class.btn-outline-success]="!isCompleted" [class.btn-success]="isCompleted" (click)="setCompleted()"><i class="fa-solid fa-flag-checkered"></i> Completados</button>
+</div>
+  

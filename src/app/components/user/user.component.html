@@ -1,0 +1,37 @@
+<div *ngIf="datos">
+  <div class="text-center">
+    <img src="https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745" height="100px" width="100px">
+    <h2 style="color: #005a71; font-size: 2.2rem; font-weight: 600;" class="text-center">{{ datos.people[0].name }} {{ datos.people[0].lastName }}</h2>
+  </div>
+  <hr>
+  <br />
+  <h3 style="color: #005a71; font-size: 2.2rem; font-weight: 600;">Tus cursos:</h3>
+  <app-dropdownlist (categorySelected)="filtrarPorCategoria($event)"></app-dropdownlist>
+  <app-flexbox></app-flexbox>
+  <br>
+  <div class="row row-cols-1 row-cols-md-4 g-4">
+    <div class="col" *ngFor="let inscription of (cursosFiltrados.length ? cursosFiltrados : datos.inscriptions)">
+      <div class="card h-100 mb-3 position-relative border-2"
+        [ngClass]="{'border-success ': inscription.advance === 100, 'border-warning': inscription.advance > 0 && inscription.advance < 100, 'border-danger': inscription.advance === 0}"
+        (mouseenter)="onCardMouseEnter($event.target)" (mouseleave)="onCardMouseLeave($event.target)" (click)="openModal(inscription)">
+        <img [src]="inscription.course.imageUrl" class="card-img-top" alt="{{ inscription.course.name }}"
+          [style.background-color]="inscription.course.sector.colorTheme">
+        <div class="card-body">
+          <h5 class="card-title">{{ inscription.course.name }}</h5>
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" [style.width.%]="inscription.advance"
+              [attr.aria-valuenow]="inscription.advance" aria-valuemin="0" aria-valuemax="100"
+              [ngClass]="{'bg-success': inscription.advance === 100, 'bg-warning': inscription.advance > 0 && inscription.advance < 100, 'bg-danger': inscription.advance === 0}">
+              {{ inscription.advance === 0 ? 'Sin iniciar' : inscription.advance + '%' }}
+            </div>
+          </div>
+          <p class="card-text">Fecha de inscripción: {{ inscription.inscripcionDate }}</p>
+        </div>
+        <div class="card-footer text-muted">
+          <p class="card-text" [style.color]="inscription.course.sector.colorTheme">{{inscription.course.sector.name }} </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-top></app-top>

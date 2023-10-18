@@ -1,0 +1,11 @@
+<app-nav></app-nav>
+<div class="container">
+  <app-home *ngIf="showHome"></app-home>
+  <router-outlet (activate)="hideHome()"></router-outlet>
+</div>
+<br>
+<footer class="border-top footer text-muted">
+  <div class="container">
+    <p>CDMX, 2023 Fundación Slim</p>
+  </div>
+</footer>
